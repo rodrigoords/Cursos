@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -18,9 +22,15 @@ public class Autor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message="Nome do Autor é obrigatório!")
 	private String nome;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
+	@NotNull(message="Nascimento é obrigatório!")
 	private Date nascimento;
+	
+	@NotNull(message="Nacionalidade é obrigatório!")
+	private String nacionalidade;
 	
 	@OneToMany(mappedBy="autor")
 	@JsonIgnore
@@ -48,6 +58,14 @@ public class Autor {
 
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
+	}
+	
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
 	}
 
 	public List<Livro> getLivros() {

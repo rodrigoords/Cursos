@@ -1,4 +1,9 @@
 package br.com.caelum.contas.modelo;
+/**
+ * 
+ * @author Rodrigo Sene
+ *
+ */
 public class Conta{
 
   private static int cont;
@@ -52,7 +57,14 @@ public class Conta{
   public String getDataAbertura(){
     return this.dataAbertura.imprimeData();
   }
-
+  
+  /**
+   * Verifica se o valor requerido é menor ou igual ao saldo, caso possítivo debita do saldo 
+   * da conta.
+   * @param valor
+   * @return True  Caso realizado corretamente o saldo.
+   *         False Caso não tenha debitado da conta. 
+   */
   public boolean saca(double valor){
     if(saldo >= valor){
       saldo -= valor;

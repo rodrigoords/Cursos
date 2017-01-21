@@ -6,12 +6,12 @@ public class ContaPoupanca extends Conta {
 	
 	public ContaPoupanca(Pessoa titular) {
 		super(titular);
-		this.tipo = "Poupança";
+		this.tipo = "Conta Poupança";
 	}
 	
 	@Override
 	public String getTipo(){
-		return super.getTipo()+ " " + this.tipo;
+		return this.tipo;
 	}
 
 }

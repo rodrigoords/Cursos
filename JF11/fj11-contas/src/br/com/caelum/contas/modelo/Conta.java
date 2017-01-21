@@ -5,7 +5,7 @@ package br.com.caelum.contas.modelo;
  * @author Rodrigo Sene
  *
  */
-public class Conta {
+public abstract class Conta {
 
 	private static int cont;
 
@@ -104,11 +104,9 @@ public class Conta {
 		dados += "\nSaldo: " + this.getSaldo();
 		dados += "\nRendimento: " + this.calculaRendimento();
 		dados += "\nIdentificador: " + this.getIdentificador();
-
+		dados += "\nTipo: " + this.getTipo();
 		return dados;
 	}
 	
-	public String getTipo(){
-		return "Conta";
-	}
+	abstract String getTipo();
 }

@@ -1,10 +1,12 @@
 package com.algaworks.socialbooks.client;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -40,6 +42,9 @@ public class LivrosClient {
 
 		ResponseEntity<Livro[]> response = restTemplate.exchange(request, Livro[].class);
 		
+		if (response.getStatusCode() != HttpStatus.OK){
+			return new ArrayList<Livro>();
+		}
 		return Arrays.asList(response.getBody());
 	}
 	

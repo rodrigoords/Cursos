@@ -8,14 +8,13 @@ package br.com.caelum.contas.modelo;
 public abstract class Conta {
 
 	private static int cont;
-
 	private Pessoa titular;
 	private int numero;
 	private String agencia;
 	private double saldo;
 	private Data dataAbertura;
 	private int identificador;
-
+	
 	public Conta(Pessoa titular) {
 		this();
 		this.titular = titular;
@@ -51,7 +50,7 @@ public abstract class Conta {
 		return cont;
 	}
 
-	public String getTitular() {
+	public String getNomeTitular() {
 		return this.titular.getNome();
 	}
 
@@ -72,18 +71,22 @@ public abstract class Conta {
 	 * debita do saldo da conta.
 	 * 
 	 * @param valor
-	 * @return True Caso realizado corretamente o saldo. False Caso não tenha
-	 *         debitado da conta.
+	 * 
 	 */
-	public boolean saca(double valor) {
-		if (saldo >= valor) {
-			this.saldo -= valor;
-			return true;
+	public void saca(double valor) {
+		if (valor < 0){
+			throw new IllegalArgumentException("Você tentou sacar um valor negativo!");
 		}
-		return false;
+		if (saldo < valor) {
+			throw new SaldoInsuficienteException("O saldo em conta não é suficiente!");
+		}
+		this.saldo -= valor;
 	}
 
 	public void deposita(double valor) {
+		if (valor < 0){
+			throw new IllegalArgumentException("Você tentou depositar um valor negativo!");
+		}
 		this.saldo += valor;
 	}
 
@@ -96,17 +99,25 @@ public abstract class Conta {
 		conta.deposita(valor);
 	}
 	
-	public String recuperaDadosParaImpressao() {
-		String dados = "Titular: " + this.titular.getNome();
-		dados += "\nNumero: " + this.getNumero();
-		dados += "\nAgencia: " + this.getAgencia();
-		dados += "\nData Abertura: " + this.getDataAbertura();
-		dados += "\nSaldo: " + this.getSaldo();
-		dados += "\nRendimento: " + this.calculaRendimento();
-		dados += "\nIdentificador: " + this.getIdentificador();
-		dados += "\nTipo: " + this.getTipo();
+	abstract String getTipo();
+	
+	@Override
+	public String toString() {
+		String dados = "[Titular: " + this.titular.getNome().toUpperCase();
+			   dados += " Numero: " + this.getNumero();
+		       dados += " Agencia: " + this.getAgencia() + "]";
 		return dados;
 	}
 	
-	abstract String getTipo();
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Conta){
+			Conta comparacao = (Conta) obj;
+			if(comparacao != null){
+				return comparacao.getNumero() == this.getNumero() && 
+					   comparacao.getAgencia() == this.getAgencia();
+			}
+		}
+		return false;
+	}
 }

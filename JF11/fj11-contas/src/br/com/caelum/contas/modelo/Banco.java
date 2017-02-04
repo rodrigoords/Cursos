@@ -41,7 +41,7 @@ public class Banco {
 	public void mostraContas() {
 		for (Conta conta : contas) {
 			if(conta != null){				
-				System.out.println("Conta [Titular: " + conta.getNomeTitular() + " Numero: " + conta.getNumero()
+				System.out.println("Conta [Titular: " + conta.getTitular() + " Numero: " + conta.getNumero()
 				+ " Agencia: " + conta.getAgencia() + "]");
 			}
 		}

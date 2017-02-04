@@ -5,7 +5,7 @@ package br.com.caelum.contas.modelo;
  * @author Rodrigo Sene
  *
  */
-public abstract class Conta {
+public abstract class Conta implements Comparable<Conta>{
 
 	private static int cont;
 	private Pessoa titular;
@@ -50,7 +50,7 @@ public abstract class Conta {
 		return cont;
 	}
 
-	public String getNomeTitular() {
+	public String getTitular() {
 		return this.titular.getNome();
 	}
 
@@ -65,7 +65,7 @@ public abstract class Conta {
 	public String getDataAbertura() {
 		return this.dataAbertura.imprimeData();
 	}
-
+	
 	/**
 	 * Verifica se o valor requerido é menor ou igual ao saldo, caso possítivo
 	 * debita do saldo da conta.
@@ -99,17 +99,25 @@ public abstract class Conta {
 		conta.deposita(valor);
 	}
 	
-	abstract String getTipo();
+	public abstract String getTipo();
 	
-	@Override
 	public String toString() {
-		String dados = "[Titular: " + this.titular.getNome().toUpperCase();
-			   dados += " Numero: " + this.getNumero();
-		       dados += " Agencia: " + this.getAgencia() + "]";
+		String dados = "[ Tipo: "+this.getTipo();
+		       dados += ", Titular: " + this.titular.getNome().toUpperCase();
+			   dados += ", Numero: " + this.getNumero();
+		       dados += ", Agencia: " + this.getAgencia() + "]";
 		return dados;
 	}
 	
-	@Override
+	public String formatoSalvar(){
+		String retorno =  this.getTipo() + ",";
+		       retorno += this.titular.getNome().toUpperCase() + ",";
+		       retorno += this.getNumero() + ",";
+		       retorno += this.getAgencia() + ", ";
+		       retorno += this.getSaldo();
+		return retorno;
+	}
+	
 	public boolean equals(Object obj) {
 		if(obj instanceof Conta){
 			Conta comparacao = (Conta) obj;
@@ -119,5 +127,9 @@ public abstract class Conta {
 			}
 		}
 		return false;
+	}
+	
+	public int compareTo(Conta outraConta){
+		return this.getTitular().compareTo(outraConta.getTitular());
 	}
 }

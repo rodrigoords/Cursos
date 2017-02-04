@@ -1,0 +1,4 @@
+Conta Corrente,RODRIGO SENE,1234,0012, 300.0
+Conta Poupança,RODRIGO SENE,12345,0012, 600.0
+Conta Corrente,ANA,1235,0012, 0.0
+Conta Corrente,TESTE,236432,0012, 577.78

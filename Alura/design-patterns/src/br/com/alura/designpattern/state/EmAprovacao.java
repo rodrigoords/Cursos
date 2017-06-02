@@ -1,4 +1,4 @@
-package br.com.alura.designerpattern.state;
+package br.com.alura.designpattern.state;
 
 import br.com.alura.designpattern.strategy.Orcamento;
 

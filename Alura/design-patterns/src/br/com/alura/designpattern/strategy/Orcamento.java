@@ -5,13 +5,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import br.com.alura.designerpattern.state.EmAprovacao;
-import br.com.alura.designerpattern.state.EstadoDeOracamento;
 import br.com.alura.designpattern.chainofresponsibility.Desconto;
 import br.com.alura.designpattern.chainofresponsibility.DescontoAcimaDeCincoItens;
 import br.com.alura.designpattern.chainofresponsibility.DescontoValorMaiorQue500;
 import br.com.alura.designpattern.chainofresponsibility.Item;
 import br.com.alura.designpattern.chainofresponsibility.SemDesconto;
+import br.com.alura.designpattern.state.EmAprovacao;
+import br.com.alura.designpattern.state.EstadoDeOracamento;
 
 public class Orcamento {
 

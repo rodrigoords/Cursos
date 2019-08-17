@@ -31,3 +31,6 @@ buildNumber.properties
 .mvn/
 mvnw
 mvnw.cmd
+
+*.pdf
+*.epub

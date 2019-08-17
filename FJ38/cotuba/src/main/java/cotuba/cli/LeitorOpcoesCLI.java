@@ -1,4 +1,4 @@
-package cotuba;
+package cotuba.cli;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,10 +45,8 @@ public class LeitorOpcoesCLI {
 		try {
 			cmd = cmdParser.parse(options, args);
 		} catch (ParseException e) {
-			System.err.println(e.getMessage());
 			ajuda.printHelp("cotuba", options);
-			System.exit(1);
-			return;
+			throw new RuntimeException("Opção inválida", e);
 		}
 		String nomeDoDiretorioDosMD = cmd.getOptionValue("dir");
 		if (nomeDoDiretorioDosMD != null) {
